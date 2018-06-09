@@ -9,7 +9,9 @@ import java.io.File;
 import java.net.URL;
 import java.net.MalformedURLException;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonFactory;
@@ -29,7 +31,8 @@ public class CardParser {
     JsonFactory factory = new JsonFactory();
     ObjectMapper mapper = new ObjectMapper(factory);
     ObjectMapper cardMapper = new ObjectMapper();
-    MagicCard obj = null;
+    MagicCard currentCard = null;
+    List<MagicCard> cardList = new ArrayList<MagicCard>();
 
     try {
       JsonNode rootNode = mapper.readTree(new URL(url));
@@ -37,11 +40,15 @@ public class CardParser {
       Iterator<Map.Entry<String,JsonNode>> fieldsIterator = rootNode.fields();
       while (fieldsIterator.hasNext()) {
         Map.Entry<String,JsonNode> field = fieldsIterator.next();
-        obj = cardMapper.readValue(field.getValue().toString(), MagicCard.class);
-        System.out.println(obj.getName());
+        currentCard = cardMapper.readValue(field.getValue().toString(), MagicCard.class);
+        cardList.add(currentCard);
       }
     } catch (IOException ie) {
       System.out.println(ie.toString());
+    }
+
+    for (MagicCard card : cardList) {
+      System.out.println(card.getName());
     }
   }
 }
