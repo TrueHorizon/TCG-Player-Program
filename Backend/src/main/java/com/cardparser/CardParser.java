@@ -21,12 +21,18 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.cardparser.MagicCard;
 
 public class CardParser {
+  // URL location for the AllCards.json file from MTGJson.
   private static String url = "https://mtgjson.com/json/AllCards.json";
 
   public CardParser() {
       getAllCardsJsonFile(url);
   }
 
+  /*
+  * This method connects to the MTGJson site, downloads
+  * AllCards.json, and parses the file with Jackson. It
+  * then adds the cards to an ArrayList.
+  */
   public static void getAllCardsJsonFile(String url) {
     JsonFactory factory = new JsonFactory();
     ObjectMapper mapper = new ObjectMapper(factory);
