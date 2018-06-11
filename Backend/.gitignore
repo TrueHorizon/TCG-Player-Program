@@ -1,6 +1,8 @@
 # Compiled source #
 ###################
 *.class
+*.lst
+pom.properties
 
 # Packages #
 ############

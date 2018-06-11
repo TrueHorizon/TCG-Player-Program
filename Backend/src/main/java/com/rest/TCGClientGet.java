@@ -26,13 +26,14 @@ import java.net.URL;
 
 public class TCGClientGet {
 	// These form the --data-binary in the curl request.
+	// TODO:Remove the public and private key and figure a secure way to store them.
 	private static final String PUBLIC_KEY = "";
 	private static final String PRIVATE_KEY = "";
 	private static final String POST_PARAMS =
 	"grant_type=client_credentials&client_id=" + PUBLIC_KEY +
 	"&client_secret=" + PRIVATE_KEY;
 
-	// curl request to e
+	// curl request to the TCGPlayer API
 	public TCGClientGet() {
 		try {
 			URL url = new URL("https://api.tcgplayer.com/token");
@@ -53,6 +54,7 @@ public class TCGClientGet {
 			BufferedReader br = new BufferedReader(new InputStreamReader(
 			  (conn.getInputStream())));
 
+			// TODO:Need to parse the json output into a class.
 			String output;
 			System.out.println("Output from Server .... \n");
 			while ((output = br.readLine()) != null) {
